@@ -1,9 +1,11 @@
-sync:
+sync:  #chat sync
   servers:
-    - sc
+    - example
 
+
+# player database
 database:
-  host: "localhost:3989"
+  host: "localhost:3306"
   database: "slimefun"
   user: "slimefun"
   password: "password"
