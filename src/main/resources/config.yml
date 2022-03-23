@@ -1,0 +1,9 @@
+sync:
+  servers:
+    - sc
+
+database:
+  host: "localhost:3989"
+  database: "slimefun"
+  user: "slimefun"
+  password: "password"

@@ -1,0 +1,5 @@
+name: SlimefunSync
+version: '${project.version}'
+main: me.zimzaza4.slimefun.slimefunsync.SlimefunSync
+api-version: 1.18
+depend: [ Slimefun ]
