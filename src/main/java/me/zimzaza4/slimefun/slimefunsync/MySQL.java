@@ -49,7 +49,7 @@ public class MySQL {
             System.out.println("[MySQLAPI] Es fehlen benoetigte Klassen!");
             e1.printStackTrace();
         }
-        String url = "jdbc:mysql://" + this.Host + "/" + this.Database + "?useSSL=false";
+        String url = "jdbc:mysql://" + this.Host + "/" + this.Database + "?useSSL=false?autoReconnect=true";
         // 		String url = "jdbc:mysql://" + this.Host + ":3306/" + this.Database + "?autoReconnect=true";
 
         try {
