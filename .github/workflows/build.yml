@@ -1,6 +1,14 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+
 name: Build Request
 
-on: [push]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
@@ -8,24 +16,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-      - name: Set up JDK 16
-        uses: actions/setup-java@v1
-        with:
-          java-version: 16
-      - name: submodules-init
-        uses: snickerbockers/submodules-init@v4
-      - name: Build with Maven
-        run: mvn -B package -T 2C
-      - name: Archive artifacts
-        uses: actions/upload-artifact@v2
-        if: success()
-        with:
-          name: Geyser Standalone
-          path: target/*.jar
+    - uses: actions/checkout@v2
+    - name: Set up JDK 16
+      uses: actions/setup-java@v2
+      with:
+        java-version: '16'
+        distribution: 'adopt'
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+    
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      if: success()
+      with:
+        name: SlimefunSync
+        path: "target/SlimefunSync v1.0-SNAPSHOT.jar"
+
+    - name: Release
+      uses: marvinpinto/action-automatic-releases@latest
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        automatic_release_tag: 'dev'
+        prerelease: false
+        title: 'SlimefunSync Automatic Build'
+        files: target/SlimefunSync v1.0-SNAPSHOT.jar
