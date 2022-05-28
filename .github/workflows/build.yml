@@ -30,7 +30,7 @@ jobs:
       if: success()
       with:
         name: SlimefunSync
-        path: "target/SlimefunSync v1.0-SNAPSHOT.jar"
+        path: "target/*.jar"
 
     - name: Release
       uses: marvinpinto/action-automatic-releases@latest
@@ -39,4 +39,4 @@ jobs:
         automatic_release_tag: 'dev'
         prerelease: false
         title: 'SlimefunSync Automatic Build'
-        files: target/SlimefunSync v1.0-SNAPSHOT.jar
+        files: target/*.jar
