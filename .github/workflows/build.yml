@@ -30,13 +30,13 @@ jobs:
       if: success()
       with:
         name: SlimefunSync
-        path: "target/SlimefunSync v1.0-SNAPSHOT.jar"
+        path: "target/*.jar"
 
-    - name: Release
+    - name: Automatic Prerelease
       uses: marvinpinto/action-automatic-releases@latest
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         automatic_release_tag: 'dev'
-        prerelease: false
+        prerelease: true
         title: 'SlimefunSync Automatic Build'
-        files: target/SlimefunSync v1.0-SNAPSHOT.jar
+        files: target/*.jar
